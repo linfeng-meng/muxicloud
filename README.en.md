@@ -1,36 +1,35 @@
 # MUXICloud
 
 #### Description
-木犀云平台项目
+MUXI Cloud
 
-#### Software Architecture
-Software architecture description
+## development
 
-#### Installation
+```bash
+# Clone Project
+git clone https://gitee.com/LinfengMeng/muxicloud.git
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+# 进入项目目录
+cd muxicloud
 
-#### Instructions
+# Enter the project directory
+npm install
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+# It is recommended that you do not directly use ==cnpm== to install dependencies. There will be various strange bugs. The following operations can be used to solve the problem of slow download speed of npm
+npm install --registry=https://registry.npmmirror.com
 
-#### Contribution
+# Start Service
+npm run dev
+```
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+Browser Access http://localhost:80
 
+## publish
 
-#### Gitee Feature
+```bash
+# Build test environment
+npm run build:stage
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+# Build production environment
+npm run build:prod
+```
