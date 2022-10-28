@@ -133,3 +133,12 @@ export function deptTreeSelect() {
     method: 'get'
   })
 }
+
+
+// 查询企业下拉树结构
+export function enterpriseTreeSelect() {
+  return request({
+    url: '/user/getDefaultEnterpriseTree',
+    method: 'get'
+  })
+}

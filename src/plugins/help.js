@@ -38,9 +38,9 @@ function filterMenu(arr = [], id) {
 export default {
   menu(menulist){
     const myTree = filterMenu(menulist, 0)
-    const result = myTree.children.filter(item=>{
-      return item.children && item.children.length > 0
-    })
-    return result
+    // const result = myTree.children.filter(item=>{
+    //   return item.children && item.children.length > 0
+    // })
+    return myTree.children
   }
 }
