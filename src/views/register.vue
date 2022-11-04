@@ -168,7 +168,7 @@ export default {
     },
     open(value) {
       this.$alert(privacy[value]['content'], privacy[value]['name'], {
-        confirmButtonText: this.$t('common.confirm'),
+        confirmButtonText: this.$t('common.Confirm'),
         dangerouslyUseHTMLString: true,
         customClass: 'privacy',
         callback: action => {}

@@ -14,7 +14,10 @@
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
-
+        <div class="right-menu-item hover-effect">
+          <lang-select></lang-select>
+        </div>
+        
       </template>
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
@@ -45,6 +48,7 @@ import TopNav from '@/components/TopNav'
 import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
+import LangSelect from '@/components/LangSelect'
 import Search from '@/components/HeaderSearch'
 
 export default {
@@ -54,6 +58,7 @@ export default {
     Hamburger,
     Screenfull,
     SizeSelect,
+    LangSelect,
     Search
   },
   computed: {

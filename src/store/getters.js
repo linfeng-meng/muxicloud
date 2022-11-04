@@ -16,7 +16,10 @@ const getters = {
   topbarRouters:state => state.permission.topbarRouters,
   defaultRoutes:state => state.permission.defaultRoutes,
   sidebarRouters:state => state.permission.sidebarRouters,
-  enterprise:state => state.enterprise.enterprise,
-  site:state => state.enterprise.site,
+  //site
+  enterpriseSiteList:state => state.enterprise.enterpriseSiteList,
+  currentSite:state => state.enterprise.currentSite,
+  siteIDs:state => state.enterprise.siteIDs,
+  siteTreeFresh:state => state.enterprise.siteTreeFresh,
 }
 export default getters

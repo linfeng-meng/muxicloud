@@ -5,10 +5,12 @@ const user = require('./user')
 const sysdict = require('./sysdict')
 const sysuser = require('./sysuser')
 const sysrole = require('./sysrole')
-const sysmenu = require('./sysmenu')
 const role = require('./role')
 const article = require('./article')
 const search = require('./remote-search')
+//muxi
+const sysmenu = require('./sysmenu')
+const company = require('./company')
 
 const mocks = [
   ...user,
@@ -17,8 +19,11 @@ const mocks = [
   ...sysdict,
   ...sysuser,
   ...sysrole,
+  ...search,
+  //muxi
   ...sysmenu,
-  ...search
+  ...company
+
 ]
 
 // for front mock

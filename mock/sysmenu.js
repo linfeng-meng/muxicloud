@@ -97,7 +97,7 @@ module.exports = [
             "parentName": null,
             "parentId": 0,
             "orderNum": 4,
-            "path": "http://ruoyi.vip",
+            "path": "http://menglinfeng.top",
             "component": null,
             "query": "",
             "isFrame": "0",

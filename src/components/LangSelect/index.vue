@@ -1,7 +1,8 @@
 <template>
   <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
     <span class="el-dropdown-link">
-      <svg-icon class-name="international-icon" icon-class="language" />
+      {{language}}
+      <!-- <svg-icon class-name="international-icon" icon-class="language" /> -->
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item :disabled="language==='zh'" command="zh">
@@ -16,14 +17,6 @@
 
 <script>
 export default {
-  data(){
-    return{
-      aaa:"111"
-    }
-  },
-  mounted(){
-    console.log(this.$store);
-  },
   computed: {
     language() {
       switch (this.$store.getters.language) {
@@ -41,18 +34,17 @@ export default {
       this.$i18n.locale = lang
       this.$store.dispatch('app/setLanguage', lang)
       this.$message({
-        message: this.$t('common.switchLangSuc'),
+        message: this.$t('common["Switch Language Success"]'),
         type: 'success'
       })
     }
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .el-dropdown-link {
     cursor: pointer;
+    font-size: 18px;
   }
-  .international-icon {
-    font-size: 20px;
-  }
+
 </style>

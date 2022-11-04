@@ -1,11 +1,11 @@
 import auth from '@/plugins/auth'
 import help from '@/plugins/help'
 import router, { constantRoutes, dynamicRoutes } from '@/router'
-import { getRouters } from '@/api/menu'
+// import { getRouters } from '@/api/menu'
+import { defauleMenus } from '@/router/menu'
 import Layout from '@/layout/index'
 import ParentView from '@/components/ParentView'
 import InnerLink from '@/layout/components/InnerLink'
-
 const permission = {
   state: {
     routes: [],
@@ -34,20 +34,22 @@ const permission = {
     GenerateRoutes({ commit }) {
       return new Promise(resolve => {
         // 向后端请求路由数据
-        getRouters().then(res => {
-          const sdata = JSON.parse(JSON.stringify(help.menu(res.data)))
-          const rdata = JSON.parse(JSON.stringify(help.menu(res.data)))
-          const sidebarRoutes = filterAsyncRouter(sdata)
-          const rewriteRoutes = filterAsyncRouter(rdata, false, true)
-          const asyncRoutes = filterDynamicRoutes(dynamicRoutes);
-          rewriteRoutes.push({ path: '*', redirect: '/404', hidden: true })
-          router.addRoutes(asyncRoutes);
-          commit('SET_ROUTES', rewriteRoutes)
-          commit('SET_SIDEBAR_ROUTERS', constantRoutes.concat(sidebarRoutes))
-          commit('SET_DEFAULT_ROUTES', sidebarRoutes)
-          commit('SET_TOPBAR_ROUTES', sidebarRoutes)
-          resolve(rewriteRoutes)
-        })
+        // getRouters().then(res => {
+        // const sdata = JSON.parse(JSON.stringify(help.menu(res.data)))
+        // const rdata = JSON.parse(JSON.stringify(help.menu(res.data)))
+        const sdata = JSON.parse(JSON.stringify(help.menu(defauleMenus)))
+        const rdata = JSON.parse(JSON.stringify(help.menu(defauleMenus)))
+        const sidebarRoutes = filterAsyncRouter(sdata)
+        const rewriteRoutes = filterAsyncRouter(rdata, false, true)
+        const asyncRoutes = filterDynamicRoutes(dynamicRoutes);
+        rewriteRoutes.push({ path: '*', redirect: '/404', hidden: true })
+        router.addRoutes(asyncRoutes);
+        commit('SET_ROUTES', rewriteRoutes)
+        commit('SET_SIDEBAR_ROUTERS', constantRoutes.concat(sidebarRoutes))
+        commit('SET_DEFAULT_ROUTES', sidebarRoutes)
+        commit('SET_TOPBAR_ROUTES', sidebarRoutes)
+        resolve(rewriteRoutes)
+        // })
       })
     }
   }
