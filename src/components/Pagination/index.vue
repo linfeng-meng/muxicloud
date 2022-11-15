@@ -11,7 +11,9 @@
       v-bind="$attrs"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-    />
+    >
+    <span v-if="refresh" class="refresh el-icon-refresh-right" @click="reload"></span>
+    </el-pagination>
   </div>
 </template>
 
@@ -46,7 +48,7 @@ export default {
     },
     layout: {
       type: String,
-      default: 'total, sizes, prev, pager, next, jumper'
+      default: 'total, sizes, prev, pager, next, jumper, slot'
     },
     background: {
       type: Boolean,
@@ -57,6 +59,10 @@ export default {
       default: true
     },
     hidden: {
+      type: Boolean,
+      default: false
+    },
+    refresh:{
       type: Boolean,
       default: false
     }
@@ -98,6 +104,10 @@ export default {
       if (this.autoScroll) {
         scrollTo(0, 800)
       }
+    },
+    reload(){
+      this.$router.go(0)
+      // this.$emit('refresh-method')
     }
   }
 }
@@ -110,5 +120,11 @@ export default {
 }
 .pagination-container.hidden {
   display: none;
+}
+.refresh{
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 20px!important;
+  vertical-align: middle;
 }
 </style>

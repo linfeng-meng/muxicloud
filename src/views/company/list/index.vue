@@ -86,7 +86,8 @@
     </el-dialog>
     <!-- 百度地图 -->
     <el-dialog :title="$t('common.Map')" :visible.sync="openMap" destroy-on-close width="60%">
-      <map-location ref="map" />
+      <div style="width:100%;height:500px"><map-location ref="map" /></div>
+      
       <span slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogVisible = false">取 消</el-button> -->
         <el-button type="primary" @click="getAddress">{{ $t('common.Confirm') }}</el-button>

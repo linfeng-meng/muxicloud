@@ -64,6 +64,7 @@ export const defauleMenus = [
     "icon": "guide",
     "children": []
   },
+  //monitor
   {
     "params": {},
     "menuId": 1101,
@@ -96,13 +97,54 @@ export const defauleMenus = [
     "menuName": "Logs",
     "parentName": null,
     "parentId": 1,
-    "path": "logs",
-    "component": "monitor/logs/index",
+    "path": "log",
+    "component": "ParentView",
     "menuType": "C",
     "perms": "monitor:logs:list",
     "icon": "",
     "children": []
   },
+  //##logs
+  {
+    "params": {},
+    "menuId": 11031,
+    "menuName": "Operation Logs",
+    "parentName": null,
+    "parentId": 1103,
+    "path": "operlog",
+    "component": "monitor/logs/oper/index",
+    "menuType": "C",
+    "perms": "monitor:operlog:list",
+    "icon": "",
+    "children": []
+  },
+  {
+    "params": {},
+    "menuId": 11032,
+    "menuName": "Device Logs",
+    "parentName": null,
+    "parentId": 1103,
+    "path": "devicelog",
+    "component": "monitor/logs/device/index",
+    "menuType": "C",
+    "perms": "monitor:devicelog:list",
+    "icon": "",
+    "children": []
+  },
+  {
+    "params": {},
+    "menuId": 11033,
+    "menuName": "Terminal Logs",
+    "parentName": null,
+    "parentId": 1103,
+    "path": "termlog",
+    "component": "monitor/logs/terminal/index",
+    "menuType": "C",
+    "perms": "monitor:termlog:list",
+    "icon": "",
+    "children": []
+  },
+  //device
   {
     "params": {},
     "menuId": 1201,
@@ -181,6 +223,7 @@ export const defauleMenus = [
     "icon": "",
     "children": []
   },
+  //wireless
   {
     "params": {},
     "menuId": 1301,
@@ -233,6 +276,7 @@ export const defauleMenus = [
     "icon": "",
     "children": []
   },
+  //enterprise
   {
     "params": {},
     "menuId": 1401,
@@ -272,6 +316,7 @@ export const defauleMenus = [
     "icon": "",
     "children": []
   },
+  //alarm
   {
     "params": {},
     "menuId": 1501,

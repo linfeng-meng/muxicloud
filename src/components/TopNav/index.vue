@@ -7,7 +7,7 @@
     <template v-for="(item, index) in topMenus">
       <el-menu-item :style="{'--theme': theme}" :index="item.path" :key="index" v-if="index < visibleNumber"
         ><svg-icon :icon-class="item.meta.icon" />
-        {{ item.meta.title }}</el-menu-item
+        {{ generateTitle(item.meta.title) }}</el-menu-item
       >
     </template>
 
@@ -20,7 +20,7 @@
           :key="index"
           v-if="index >= visibleNumber"
           ><svg-icon :icon-class="item.meta.icon" />
-          {{ item.meta.title }}</el-menu-item
+          {{ generateTitle(item.meta.title) }}</el-menu-item
         >
       </template>
     </el-submenu>
@@ -29,6 +29,7 @@
 
 <script>
 import { constantRoutes } from "@/router";
+import { generateTitle } from '@/utils/i18n'
 
 // 隐藏侧边栏路由
 const hideList = ['/index', '/user/profile'];
@@ -149,7 +150,8 @@ export default {
     },
     ishttp(url) {
       return url.indexOf('http://') !== -1 || url.indexOf('https://') !== -1
-    }
+    },
+    generateTitle
   },
 };
 </script>

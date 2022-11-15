@@ -21,7 +21,6 @@
   </div>
 </template>
 <script>
-import cache from "@/plugins/cache";
 import { mapState } from 'vuex'
 export default {
   name: 'EnterpriseSite',
@@ -48,27 +47,6 @@ export default {
     this.list = this.$store.getters.enterpriseSiteList
   },
   methods: {
-    getCurrentData(id, list) {
-      for (const i = 0; i < list.length; i++) {
-        if (list[i].id === id) {
-          this.$store.dispatch('enterprise/setEnterprise', list[i].id)
-          this.$store.dispatch('enterprise/setSite', "")
-          cache.local.set("last_select_site_id", list[i].id)
-          this.site = list[i].name
-          return
-        } else {
-          for (const j = 0; j < list[i].children.length; j++) {
-            if (list[i].children[j].id === id) {
-              this.$store.dispatch('enterprise/setEnterprise', list[i].id)
-              this.$store.dispatch('enterprise/setSite', list[i].children[j].id)
-              cache.local.set("last_select_site_id", list[i].children[j].id)
-              this.site = list[i].children[j].name
-              return
-            }
-          }
-        }
-      }
-    },
     // 筛选节点
     filterNode(value, data) {
       if (!value) return true;
@@ -80,12 +58,14 @@ export default {
         currentSite: data,
         redirect: !0
       })
+      this.visible = false
     },
   },
   computed: {
     ...mapState({
       currentSite: state => state.enterprise.currentSite,
       siteTreeFresh: state => state.enterprise.siteTreeFresh,
+      enterpriseSiteList: state => state.enterprise.enterpriseSiteList,
     }),
     //默认选中的站点name
     site: function () {

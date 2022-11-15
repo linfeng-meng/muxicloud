@@ -131,6 +131,7 @@ service.interceptors.response.use(res => {
 
 // 通用下载方法
 export function download(url, params, filename, config) {
+  console.log(url, params, filename, config);
   downloadLoadingInstance = Loading.service({ text: "正在下载数据，请稍候", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)", })
   return service.post(url, params, {
     transformRequest: [(params) => { return tansParams(params) }],
@@ -138,7 +139,9 @@ export function download(url, params, filename, config) {
     responseType: 'blob',
     ...config
   }).then(async (data) => {
+    console.log(data);
     const isLogin = await blobValidate(data);
+    console.log(isLogin);
     if (isLogin) {
       const blob = new Blob([data])
       saveAs(blob, filename)

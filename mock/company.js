@@ -3,8 +3,6 @@ module.exports = [
     url: '/enterprise/list',
     type: 'post',
     response: config => {
-      // const { enterpriseuuid="" } = config.query
-      console.log(config.query)
       return {
         "code": 200,
         "msg": "",
