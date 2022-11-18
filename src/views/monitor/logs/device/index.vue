@@ -100,7 +100,7 @@ export default {
     };
   },
   methods: {
-    /** 查询登录日志 */
+    /** 查询 */
     getList() {
       this.loading = true;
       devicelogList(this.listQuery).then(response => {
@@ -144,8 +144,8 @@ export default {
     },
     /** 状态重置 */
     statusFormat(row, column) {
-      const type = row.type
-      switch (type) {
+      const status = row.status
+      switch (status) {
         case '1':
           return this.$t(`common['Offline']`)
         case '2':

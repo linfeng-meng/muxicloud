@@ -106,8 +106,8 @@ export default {
       }
     },
     reload(){
-      this.$router.go(0)
-      // this.$emit('refresh-method')
+      console.log(1);
+      this.$emit('refresh-method')
     }
   }
 }

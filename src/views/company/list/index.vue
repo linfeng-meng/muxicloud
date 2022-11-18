@@ -44,9 +44,9 @@
       <el-table-column :label="$t('common.Operation')" width="180">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:role:edit']">{{ $t('common.Edit') }}</el-button>
+            v-hasPermi="['company:list:edit']">{{ $t('common.Edit') }}</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-            v-hasPermi="['system:role:remove']">{{ $t('common.Delete') }}</el-button>
+            v-hasPermi="['company:list:remove']">{{ $t('common.Delete') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -153,12 +153,10 @@ export default {
       this.listQuery.enterpriseuuid = this.enterpriseId
       await getEnterpriseList(this.listQuery).then(response => {
         this.enterpriseData = this.unitFormatData(response.items)
-        console.log(this.childList);
         this.childList.clear()
       })
     },
     handleSelectionChange(val) {
-      console.log(val);
     },
     handleAdd(command) {
       if (command === "enterprise") {

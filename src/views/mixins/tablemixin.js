@@ -20,6 +20,15 @@ export default {
       list: [],
       // 日期范围
       dateRange: [],
+      // 查询参数
+      listQuery: {
+        asc: "",
+        enterpriseUUID: "",
+        siteUUID: "",
+        orderby: "",
+        page: 1,
+        size: 50
+      },
     };
   },
   created() {
@@ -67,6 +76,18 @@ export default {
       this.ids = selection.map(item => item.id)
       this.multiple = !selection.length
     },
+    /** 检查是否选中数据 */
+    calCheckedIds() {
+      if (this.multiple) {
+        this.$message({
+          type: "warning",
+          message: this.$t(`common['Please select at least one record']`)
+        })
+        return false
+      } else {
+        return true
+      }
+    },
     /** 排序触发事件 */
     handleSortChange(column, prop, order) {
       this.listQuery.orderBy = column.prop;
@@ -82,7 +103,7 @@ export default {
   watch: {
     currentSite: {
       handler: function (newVal) {
-        newVal.id  && (this.setUUID(), this.getList())
+        newVal.id && (this.setUUID(), this.getList())
       },
       deep: !0
     }

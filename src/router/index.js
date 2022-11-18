@@ -161,7 +161,23 @@ export const dynamicRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
     ]
-  }
+  },
+  // AC详情
+  {
+    path: '/device/detail',
+    component: Layout,
+    hidden: true,
+    permissions: ['device:ac:edit'],
+    meta: { title: 'Device', noCache: false, link: null },
+    children: [
+      {
+        path: 'ac',
+        component: () => import('@/views/device/ac/acDetail/index'),
+        name: 'AcDetail',
+        meta: { title: 'AC Detail', activeMenu: '/device/ac' }
+      }
+    ]
+  },
 ]
 
 // 防止连续点击多次路由报错

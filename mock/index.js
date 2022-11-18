@@ -12,6 +12,7 @@ const search = require('./remote-search')
 const sysmenu = require('./sysmenu')
 const company = require('./company')
 const monitor = require('./monitor')
+const device = require('./device')
 
 const mocks = [
   ...user,
@@ -24,7 +25,8 @@ const mocks = [
   //muxi
   ...sysmenu,
   ...company,
-  ...monitor
+  ...monitor,
+  ...device
 
 ]
 
