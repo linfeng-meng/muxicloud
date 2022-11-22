@@ -52,6 +52,13 @@ module.exports = [
     }
   },
   {
+    url: '/ac/view',
+    type: 'get',
+    response: config => {
+      return {"code":0,"msg":"","data":{"deviceUUID":"512e209f73954f35be62d1974549e3d9","name":"无线控制器2","sn":"12312312","siteUUID":"bbf814c82ed14c1399334e36123113c2","siteName":"501","location":"13232","lng":0E-7,"lat":0E-7}}
+    }
+  },
+  {
     url: '/ac/deviceRestart',
     type: 'post',
     response: config => {

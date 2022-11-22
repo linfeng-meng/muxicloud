@@ -29,7 +29,7 @@ export function createEnterprise(data) {
 export function updateEnterprise(data) {
   return request({
     url: '/enterprise/update',
-    method: 'post',
+    method: 'put',
     data: data
   })
 }
@@ -43,7 +43,7 @@ export function deleteEnterprise(data) {
 // 查询站点列表
 export function getSiteList(data) {
   return request({
-    url: '/site/list?siteuuid=' + parseStrEmpty(data),
+    url: '/site/list?enterpriseUUID=' + parseStrEmpty(data),
     method: 'get'
   })
 }

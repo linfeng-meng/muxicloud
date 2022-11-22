@@ -26,11 +26,11 @@ export default {
       activeNames: ["1", "2", "3"]
     };
   },
-  // methods: {
-  //   handleChange(val) {
-  //     console.log(val);
-  //   }
-  // }
+  methods: {
+    handleChange(val) {
+      console.log(val);
+    }
+  }
 }
 </script>
 <style lang="scss">

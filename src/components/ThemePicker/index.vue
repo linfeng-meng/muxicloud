@@ -81,7 +81,7 @@ export default {
         if (typeof innerText !== 'string') return
         style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
       })
-
+console.log(val);
       this.$emit('change', val)
     },
 

@@ -260,7 +260,9 @@
 	box-shadow: 0 0 4px #ccc;
 	overflow: hidden;
 }
-
+.dialog-select{
+  width: 100%;
+}
 /* 拖拽列样式 */
 .sortable-ghost{
 	opacity: .8;

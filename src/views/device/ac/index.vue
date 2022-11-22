@@ -2,16 +2,17 @@
   <div class="app-container">
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="" v-hasPermi="['device:ac:add']">{{
-            $t('common.Create')
-        }}</el-button>
+        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleCreate"
+          v-hasPermi="['device:ac:add']">{{
+              $t('common.Create')
+          }}</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click=""
+        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="acRemoveBatch"
           v-hasPermi="['device:ac:remove']">{{ $t('common.Delete') }}</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-rank" size="mini" :disabled="multiple" @click=""
+        <el-button type="warning" plain icon="el-icon-rank" size="mini" :disabled="multiple" @click="openAC = true"
           v-hasPermi="['device:ac:add']">{{
               $t('common.Move')
           }}</el-button>
@@ -66,11 +67,10 @@
       </el-table-column>
       <el-table-column :label="$t('common.Operation')" width="180">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" v-hasPermi="['device:ac:edit']">{{ $t('common.Edit') }}
-          </el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" v-hasPermi="['device:ac:remove']">{{
-              $t('common.Delete')
-          }}</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" v-hasPermi="['device:ac:edit']"
+            @click="handleUpdate(scope.row)">{{ $t('common.Edit') }}</el-button>
+          <el-button size="mini" type="text" icon="el-icon-delete" v-hasPermi="['device:ac:remove']"
+            @click="acRemove(scope.row)">{{ $t('common.Delete') }}</el-button>
         </template>
       </el-table-column>
       <!-- <el-table-column class-name="column-search-cell" prop="sitename" align="left" width="200" sortable>
@@ -84,16 +84,61 @@
     <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size"
       @pagination="getList" :refresh="true" />
 
+    <!-- 添加或修改ac -->
+    <el-dialog :title="acTitle" :visible.sync="openAC" width="500px" append-to-body>
+      <el-form ref="acForm" :model="acForm" :rules="rules" label-width="100px">
+        <el-form-item :label="$t(`common['Name']`)" prop="name" size="mini">
+          <el-input v-model="acForm.name" placeholder="" />
+        </el-form-item>
+        <el-form-item :label="$t(`common['SN']`)" prop="sn" size="mini">
+          <el-input v-model="acForm.sn" :disabled="disabled">
+          </el-input>
+        </el-form-item>
+        <el-form-item :label="$t(`company['Site']`)" prop="siteUUID" size="mini">
+          <el-input v-if="disabled" v-model="acForm.siteName" :disabled="disabled">
+          </el-input>
+          <el-select v-else v-model="acForm.siteUUID" filterable :placeholder="$t(`common['Enter for search']`)"
+            class="dialog-select">
+            <el-option v-for="item in updataData" :key="item.siteuuid" :label="item.sitename" :value="item.siteuuid">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="$t(`device['Position']`)" prop="location" size="mini">
+          <el-input v-model="acForm.location">
+          </el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="mini" type="primary" @click="submitAC">{{ $t('common.Confirm') }}</el-button>
+        <el-button size="mini" @click="openAC = false">{{ $t('common.Cancel') }}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
 import tablemixin from '@/views/mixins/tablemixin'
-import { getACList, deviceRestart } from "@/api/device/ac";
+import { getACList, getACView, deviceRestart, createDevice, updateDevice, removeDeviceBatch, removeDevice } from "@/api/device/ac";
+import { getSiteList } from "@/api/company/enterprise";
 export default {
   name: 'AC',
   mixins: [tablemixin],
   data() {
     return {
+      acTitle: "",
+      openAC: false,
+      acForm: {},
+      disabled: false,
+      rules: {
+        name: [
+          { required: true, message: this.$t(`company['The name is required.']`), trigger: "blur" }
+        ],
+        sn: [
+          { required: true, message: this.$t(`company['The name is required.']`), trigger: "blur" }
+        ],
+        siteUUID: [
+          { required: true, message: '请选择活动区域', trigger: 'change' }
+        ],
+      },
       listQuery: {
         asc: "",
         ip: "",
@@ -110,6 +155,7 @@ export default {
         upgradeStatus: "",
         enableImcloud: ""
       },
+      updataData: []
     }
   },
   methods: {
@@ -188,6 +234,72 @@ export default {
     /** 更多操作 */
     moreCommand(command) {
       "undefined" !== typeof this[command] && this[command]()
+    },
+    handleCreate() {
+      this.acForm = {}
+      this.disabled = false
+      this.acTitle = this.$t(`common['Create']`)
+      this.openAC = true
+      getSiteList(this.listQuery.enterpriseUUID).then(res => {
+        this.updataData = res.data
+      })
+    },
+    handleUpdate(row) {
+      getACView(row.deviceUUID).then(res => {
+        this.acForm = res.data
+        this.disabled = true
+        this.acTitle = this.$t(`common['Edit']`)
+        this.openAC = true
+      })
+    },
+    /** 新增、修改 */
+    submitAC() {
+      this.$refs["acForm"].validate(valid => {
+        if (valid) {
+          if (this.disabled) {
+            updateDevice(this.acForm).then(response => {
+              this.$modal.msgSuccess(this.$t(`common['${response.msg}']`));
+              this.openEnterprise = false;
+              this.getList();
+            });
+          } else {
+            createDevice(this.acForm).then(response => {
+              this.$modal.msgSuccess(this.$t(`common['${response.msg}']`));
+              this.openAC = false;
+              this.getList();
+            });
+          }
+        }
+      })
+    },
+    /** 删除 */
+    acRemoveBatch() {
+      let that = this
+      this.$modal.confirm(this.$t(`common['This operation will be permanently deleted. Do you want to continue?']`)).then(function () {
+        const t = that.listQuery.enterpriseUUID
+        const s = that.listQuery.siteUUID
+        const i = that.ids;
+        return removeDeviceBatch({ 'enterpriseUUID': t, 'siteUUID': s, 'devices': i });
+      }).then(() => {
+        this.$message({
+          type: "success",
+          message: this.$t("common.Success")
+        })
+        this.getList();
+      }).catch((res) => {
+      });
+    },
+    acRemove(row) {
+      this.$modal.confirm(this.$t(`common['This operation will be permanently deleted. Do you want to continue?']`)).then(function () {
+        return removeDevice({ 'deviceUUID': row.deviceUUID });
+      }).then(() => {
+        this.$message({
+          type: "success",
+          message: this.$t("common.Success")
+        })
+        this.getList();
+      }).catch((res) => {
+      });
     },
     /** 重启 */
     acReboot() {

@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import { parseStrEmpty } from "@/utils/common";
 
 // 查询ac列表
 export function getACList(query) {
@@ -8,12 +9,41 @@ export function getACList(query) {
     params: query
   })
 }
-
-// 删除ac
-export function delOperlog(operId) {
+// 查询单个ac详情
+export function getACView(data) {
   return request({
-    url: '/log/operlog/' + operId,
-    method: 'delete'
+    url: '/ac/view?deviceUUID=' + parseStrEmpty(data),
+    method: 'get'
+  })
+}
+// 新增ac
+export function createDevice() {
+  return request({
+    url: '/ac/create',
+    method: 'post'
+  })
+}
+// 修改ac
+export function updateDevice(data) {
+  return request({
+    url: '/ac/update',
+    method: 'put',
+    data:data
+  })
+}
+// 删除ac
+export function removeDeviceBatch(data) {
+  return request({
+    url: '/ac/deleteBatch',
+    method: 'delete',
+    data:data
+  })
+}
+export function removeDevice(data) {
+  return request({
+    url: '/ac/delete',
+    method: 'delete',
+    data:data
   })
 }
 
@@ -23,7 +53,7 @@ export function deviceRestart(data) {
   return request({
     url: '/ac/deviceRestart',
     method: 'post',
-    data:data
+    params:data
   })
 }
 

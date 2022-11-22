@@ -2,55 +2,10 @@
 module.exports = [
 
   {
-    url: '/system/user/deptTree',
+    url: '/user/initAccountSetting',
     type: 'get',
     response: config => {
-      return {
-        "msg": "操作成功",
-        "code": 200,
-        "data": [
-              {
-                "id": 101,
-                "label": "深圳总公司",
-                "children": [
-                  {
-                    "id": 103,
-                    "label": "研发部门"
-                  },
-                  {
-                    "id": 104,
-                    "label": "市场部门"
-                  },
-                  {
-                    "id": 105,
-                    "label": "测试部门"
-                  },
-                  {
-                    "id": 106,
-                    "label": "财务部门"
-                  },
-                  {
-                    "id": 107,
-                    "label": "运维部门"
-                  }
-                ]
-              },
-              {
-                "id": 102,
-                "label": "长沙分公司",
-                "children": [
-                  {
-                    "id": 108,
-                    "label": "市场部门"
-                  },
-                  {
-                    "id": 109,
-                    "label": "财务部门"
-                  }
-                ]
-              }
-            ]
-      }
+      return {"code":0,"msg":"","data":{"username":"linfeng_meng@foxmail.com","contact":"linfeng","countryCode":"null","phoneNum":null,"wechatNum":"Black Pearl","email":"linfeng_meng@foxmail.com"}}
     }
   },
   {
@@ -77,7 +32,6 @@ module.exports = [
             "email": "ry@163.com",
             "phonenumber": "15888888888",
             "sex": "1",
-            "avatar": "",
             "password": null,
             "status": "0",
             "delFlag": "0",

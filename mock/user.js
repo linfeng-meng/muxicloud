@@ -103,7 +103,6 @@ module.exports = [
           "email": "ry@qq.com",
           "phonenumber": "15666666666",
           "sex": "1",
-          "avatar": "",
           "password": "$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2",
           "status": "0",
           "delFlag": "0",

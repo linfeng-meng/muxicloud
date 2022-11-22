@@ -22,6 +22,8 @@
 // make search results more in line with expectations
 import Fuse from 'fuse.js/dist/fuse.min.js'
 import path from 'path'
+import { generateTitle } from '@/utils/i18n'
+import { mapState } from 'vuex'
 
 export default {
   name: 'HeaderSearch',
@@ -35,11 +37,17 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      language: state => state.app.language,
+    }),
     routes() {
       return this.$store.getters.permission_routes
     }
   },
   watch: {
+    language(n){
+      this.searchPool = this.generateRoutes(this.routes)
+    },
     routes() {
       this.searchPool = this.generateRoutes(this.routes)
     },
@@ -116,7 +124,7 @@ export default {
         }
 
         if (router.meta && router.meta.title) {
-          data.title = [...data.title, router.meta.title]
+          data.title = [...data.title, this.generateTitle(router.meta.title)]
 
           if (router.redirect !== 'noRedirect') {
             // only push the routes with title
@@ -144,7 +152,8 @@ export default {
     },
     ishttp(url) {
       return url.indexOf('http://') !== -1 || url.indexOf('https://') !== -1
-    }
+    },
+    generateTitle
   }
 }
 </script>

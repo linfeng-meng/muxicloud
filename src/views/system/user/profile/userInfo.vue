@@ -1,23 +1,25 @@
 <template>
-  <el-form ref="form" :model="user" :rules="rules" label-width="80px">
-    <el-form-item label="用户昵称" prop="nickName">
-      <el-input v-model="user.nickName" maxlength="30" />
-    </el-form-item> 
-    <el-form-item label="手机号码" prop="phonenumber">
-      <el-input v-model="user.phonenumber" maxlength="11" />
+  <el-form ref="form" :model="user" label-width="80px">
+    <el-form-item :label="$t('user.Account')">
+      <!-- <el-input v-model="user.username" maxlength="30" /> -->
+      <span>{{ user.username }}</span>
     </el-form-item>
-    <el-form-item label="邮箱" prop="email">
-      <el-input v-model="user.email" maxlength="50" />
+    <el-form-item :label="$t('user.Name')" prop="contact">
+      <span class="user-text">{{ user.contact }}</span>
+      <el-button size="mini" type="primary">{{$t('common.Edit')}}</el-button>
     </el-form-item>
-    <el-form-item label="性别">
-      <el-radio-group v-model="user.sex">
-        <el-radio label="0">男</el-radio>
-        <el-radio label="1">女</el-radio>
-      </el-radio-group>
+    <el-form-item :label="$t('user.Phone')" prop="phoneNum">
+      <!-- <el-input v-model="user.phoneNum" maxlength="11" size="mini" /> -->
+      <span class="user-text">{{ user.phoneNum }}</span>
+      <el-button v-if="user.phoneNum" size="mini" type="danger">{{$t('user.Unbind')}}</el-button>
+      <el-button v-else size="mini" type="primary">{{$t('user.Bind')}}</el-button>
     </el-form-item>
-    <el-form-item>
-      <el-button type="primary" size="mini" @click="submit">保存</el-button>
-      <el-button type="danger" size="mini" @click="close">关闭</el-button>
+    <el-form-item :label="$t('user.Email')" prop="email">
+      <!-- <el-input v-model="user.email" maxlength="50" size="mini" /> -->
+      <!-- <el-input v-model="user.email" maxlength="50" size="mini" /> -->
+      <span class="user-text">{{ user.email }}</span>
+      <el-button v-if="user.email" size="mini" type="danger">{{$t('user.Unbind')}}</el-button>
+      <el-button v-else size="mini" type="primary">{{$t('user.Bind')}}</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -35,9 +37,6 @@ export default {
     return {
       // 表单校验
       rules: {
-        nickName: [
-          { required: true, message: "用户昵称不能为空", trigger: "blur" }
-        ],
         email: [
           { required: true, message: "邮箱地址不能为空", trigger: "blur" },
           {
@@ -58,18 +57,28 @@ export default {
     };
   },
   methods: {
-    submit() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          updateUserProfile(this.user).then(response => {
-            this.$modal.msgSuccess("修改成功");
-          });
-        }
-      });
-    },
-    close() {
-      this.$tab.closePage();
-    }
+    // submit() {
+    //   this.$refs["form"].validate(valid => {
+    //     if (valid) {
+    //       updateUserProfile(this.user).then(response => {
+    //         this.$modal.msgSuccess("修改成功");
+    //       });
+    //     }
+    //   });
+    // },
+    // close() {
+    //   this.$tab.closePage();
+    // }
   }
 };
 </script>
+<style lang="scss" scoped>
+.el-form {
+  max-width: 500px;
+
+  .user-text {
+    display: inline-block;
+    width: 250px;
+  }
+}
+</style>

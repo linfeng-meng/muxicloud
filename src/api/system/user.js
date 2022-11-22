@@ -73,7 +73,7 @@ export function changeUserStatus(userId, status) {
 // 查询用户个人信息
 export function getUserProfile() {
   return request({
-    url: '/system/user/profile',
+    url: '/user/initAccountSetting',
     method: 'get'
   })
 }
@@ -94,20 +94,20 @@ export function updateUserPwd(oldPassword, newPassword) {
     newPassword
   }
   return request({
-    url: '/system/user/profile/updatePwd',
+    url: '/user/updatePwd',
     method: 'put',
     params: data
   })
 }
 
 // 用户头像上传
-export function uploadAvatar(data) {
-  return request({
-    url: '/system/user/profile/avatar',
-    method: 'post',
-    data: data
-  })
-}
+// export function uploadAvatar(data) {
+//   return request({
+//     url: '/system/user/profile/avatar',
+//     method: 'post',
+//     data: data
+//   })
+// }
 
 // 查询授权角色
 export function getAuthRole(userId) {
