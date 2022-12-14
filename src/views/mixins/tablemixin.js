@@ -59,8 +59,16 @@ export default {
     },
     /** time过滤操作 */
     searchListByTime(query) {
-      this.listQuery.startTime = this.parseTime(query.searchTime[0])
-      this.listQuery.endTime = this.parseTime(query.searchTime[1])
+      const searchTime = query.searchTime;
+      if (searchTime instanceof Array) {
+        this.listQuery.startTime = this.parseTime(searchTime[0])
+        this.listQuery.endTime = this.parseTime(searchTime[1])
+      } else {
+        this.listQuery.startTime = ""
+        this.listQuery.endTime = ""
+      }
+      // this.listQuery.startTime = this.parseTime(query.searchTime[0])
+      // this.listQuery.endTime = this.parseTime(query.searchTime[1])
       this.listQuery.page = 1
       this.getList();
     },
@@ -105,7 +113,7 @@ export default {
       handler: function (newVal) {
         newVal.id && (this.setUUID(), this.getList())
       },
-      deep: !0
+      deep: true
     }
   },
 }

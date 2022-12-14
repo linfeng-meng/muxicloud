@@ -1,5 +1,9 @@
-const user = require('./ac')
+const ac = require('./ac')
+const ap = require('./ap')
+const deviceGroup = require('./deviceGroup')
 
 module.exports = [
-  ...user
+  ...ac,
+  ...ap,
+  ...deviceGroup,
 ]

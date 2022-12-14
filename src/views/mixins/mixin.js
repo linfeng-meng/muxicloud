@@ -11,14 +11,11 @@ export default {
       listQuery: {
         enterpriseUUID: "",
         siteUUID: "",
-        page: 1,
-        size: 50
       },
     };
   },
   created() {
     this.setUUID();
-    this.getList();
   },
   methods: {
     setUUID: function () {
@@ -32,13 +29,6 @@ export default {
         this.listQuery.enterpriseUUID = ""
         this.listQuery.siteUUID = ""
       }
-    },
-    /** time过滤操作 */
-    searchListByTime(query) {
-      this.listQuery.startTime = this.parseTime(query.searchTime[0])
-      this.listQuery.endTime = this.parseTime(query.searchTime[1])
-      this.listQuery.page = 1
-      this.getList();
     },
   },
   computed: {

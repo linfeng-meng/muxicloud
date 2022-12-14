@@ -8,7 +8,7 @@ module.exports = [
         "msg": "",
         "items": [
           {
-            "status": "0",
+            "status": "1",
             "name": "无线控制器1",
             "sn": "123",
             "ip": null,
@@ -21,7 +21,7 @@ module.exports = [
             "siteName": "501",
             "location": "墙角",
             "deviceUUID": "4e7dfc0c52c840e9a484e850a7e9dcd5",
-            "upgradeStatus": 0,
+            "upgradeStatus": 1,
             "enableImcloud": 0,
             "type": null
           },

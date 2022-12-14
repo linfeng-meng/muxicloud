@@ -9,7 +9,7 @@
           v-model="loginForm.username"
           type="text"
           auto-complete="off"
-          :placeholder="$t('login.username')"
+          :placeholder="$t('login.Username')"
         >
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>

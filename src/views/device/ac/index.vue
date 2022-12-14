@@ -133,10 +133,10 @@ export default {
           { required: true, message: this.$t(`company['The name is required.']`), trigger: "blur" }
         ],
         sn: [
-          { required: true, message: this.$t(`company['The name is required.']`), trigger: "blur" }
+          { required: true, message: this.$t(`common['The field is required.']`), trigger: "blur" }
         ],
         siteUUID: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
+          { required: true, message: this.$t(`common['The field is required.']`), trigger: 'change' }
         ],
       },
       listQuery: {
@@ -236,6 +236,7 @@ export default {
       "undefined" !== typeof this[command] && this[command]()
     },
     handleCreate() {
+      this.$refs.acForm && this.$refs.acForm.clearValidate()
       this.acForm = {}
       this.disabled = false
       this.acTitle = this.$t(`common['Create']`)
@@ -259,7 +260,7 @@ export default {
           if (this.disabled) {
             updateDevice(this.acForm).then(response => {
               this.$modal.msgSuccess(this.$t(`common['${response.msg}']`));
-              this.openEnterprise = false;
+              this.openAC = false;
               this.getList();
             });
           } else {

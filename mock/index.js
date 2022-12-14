@@ -9,6 +9,7 @@ const role = require('./role')
 const article = require('./article')
 const search = require('./remote-search')
 //muxi
+const dashboard = require('./dashboard')
 const sysmenu = require('./sysmenu')
 const company = require('./company')
 const monitor = require('./monitor')
@@ -23,6 +24,7 @@ const mocks = [
   ...sysrole,
   ...search,
   //muxi
+  ...dashboard,
   ...sysmenu,
   ...company,
   ...monitor,

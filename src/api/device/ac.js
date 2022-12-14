@@ -49,7 +49,6 @@ export function removeDevice(data) {
 
 // 重启
 export function deviceRestart(data) {
-  console.log(data);
   return request({
     url: '/ac/deviceRestart',
     method: 'post',

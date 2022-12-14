@@ -323,7 +323,7 @@ export const defauleMenus = [
     "menuName": "Alarm",
     "parentName": null,
     "parentId": 5,
-    "path": "list",
+    "path": "alarmList",
     "component": "alarm/list/index",
     "menuType": "C",
     "perms": "alarm:list:list",

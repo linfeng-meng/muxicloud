@@ -5,7 +5,7 @@
         <img :src="logo" class="sidebar-logo" />
       </h3>
       <el-form-item prop="username">
-        <el-input v-model="registerForm.username" type="text" auto-complete="off" :placeholder="$t('login.username')">
+        <el-input v-model="registerForm.username" type="text" auto-complete="off" :placeholder="$t('login.Username')">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
